@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SAMPLE_TODOS } from "../../constants/sample-todos";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import TodoDashboard from "./TodoDashboard";
 
 const TodoContainer = () => {
   const [todos, setTodos] = useState(SAMPLE_TODOS);
@@ -66,6 +67,7 @@ const TodoContainer = () => {
 
   return (
     <div>
+      <TodoDashboard />
       <TodoForm addTodos={addTodos} />
 
       <TodoList
