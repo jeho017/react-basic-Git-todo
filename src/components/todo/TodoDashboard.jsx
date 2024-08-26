@@ -2,7 +2,7 @@ import { ClipboardCheck, Ellipsis, Monitor, Video } from "lucide-react";
 import React from "react";
 import styled from "styled-components";
 
-const TodoDashboard = () => {
+const TodoDashboard = ({ all = 0, completed = 0, pending = 0 }) => {
   return (
     <DashboardSection>
       <DashboardHeader>
@@ -16,7 +16,7 @@ const TodoDashboard = () => {
             <Ellipsis />
           </div>
           <p>
-            16 <br /> New Task
+            {all} <br /> New Task
           </p>
         </DashboardCard>
         <DashboardCard flex="1" color="#582be7">
@@ -25,7 +25,7 @@ const TodoDashboard = () => {
             <Ellipsis />
           </div>
           <p>
-            3 <br /> Completed
+            {completed} <br /> Completed
           </p>
         </DashboardCard>
         <DashboardCard flex="1" color="#242424">
@@ -34,7 +34,7 @@ const TodoDashboard = () => {
             <Ellipsis />
           </div>
           <p>
-            13 <br /> Pending
+            {pending} <br /> Pending
           </p>
         </DashboardCard>
       </DashboardCardList>
@@ -66,6 +66,7 @@ const DashboardCardList = styled.div`
 
 const DashboardCard = styled.div`
   background-color: ${(props) => props.color};
+  /* background-color: ${({ color }) => color}; */
   padding: 1rem;
   border-radius: 1rem;
   height: calc((640px / 4));
@@ -77,6 +78,7 @@ const DashboardCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex: ${(props) => props.flex};
+  /* flex: ${({ flex }) => flex}; */
 
   div {
     display: flex;
