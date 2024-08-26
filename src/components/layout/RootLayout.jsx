@@ -1,13 +1,18 @@
 import React from "react";
+import styled from "styled-components";
 
 const RootLayout = ({ children }) => {
   return (
-    <main className="main-center">
-      <header>나는 완전히 붕괴되었어요</header>
-      {children}
-      <footer>저는 footer에요</footer>
-    </main>
+    <RootLayoutMain>
+      <RootLayoutContents>{children}</RootLayoutContents>
+    </RootLayoutMain>
   );
 };
 
 export default RootLayout;
+
+const RootLayoutMain = styled.main`
+  background-color: #f7f6f9;
+`;
+
+const RootLayoutContents = styled.div``;
