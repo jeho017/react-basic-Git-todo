@@ -69,7 +69,7 @@ const TodoContainer = () => {
   return (
     <TodoContainerWrapper>
       <TodoDashboard all={todos.length} completed={6} pending={13} />
-      {/* <TodoForm addTodos={addTodos} /> */}
+      <TodoForm addTodos={addTodos} />
 
       <TodoList
         todos={todos}

@@ -55,7 +55,7 @@ const TaskItemActions = styled.div`
   justify-content: center;
 `;
 
-const TaskItemActionButton = styled.button`
+export const TaskItemActionButton = styled.button`
   color: #ffffff; //text 컬러
   background-color: ${({ color }) => color};
   padding: 0.5rem 1rem;
