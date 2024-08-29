@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../../context/TodoContext";
 
-const TodoItem = ({ todo, toggleCompleted, handleDelete }) => {
+const TodoItem = ({ todo }) => {
+  const { toggleCompleted, handleDelete } = useContext(TodoContext);
   return (
     <TaskItem key={todo.id}>
       <TaskItemContent>
