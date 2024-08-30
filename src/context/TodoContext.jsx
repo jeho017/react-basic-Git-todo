@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { SAMPLE_TODOS } from "../constants/sample-todos";
 
 export const TodoContext = createContext();
