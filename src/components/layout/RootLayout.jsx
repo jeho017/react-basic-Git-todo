@@ -1,10 +1,13 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-const RootLayout = ({ children }) => {
+const RootLayout = () => {
   return (
     <RootLayoutMain>
-      <RootLayoutContents>{children}</RootLayoutContents>
+      <RootLayoutContents>
+        <Outlet />
+      </RootLayoutContents>
     </RootLayoutMain>
   );
 };

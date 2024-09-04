@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { TodoContext } from "../../context/TodoContext";
+import { Link } from "react-router-dom";
 
 const TodoItem = ({ todo }) => {
   const { toggleCompleted, handleDelete } = useContext(TodoContext);
@@ -12,7 +13,7 @@ const TodoItem = ({ todo }) => {
             textDecoration: todo.completed ? "line-through" : "none",
           }}
         >
-          {todo.text} -{" "}
+          <Link to={`/${todo.id}`}>{todo.text}</Link> -{" "}
           {todo.completed ? <span>완료됨</span> : <span>미완료</span>}
         </p>
       </TaskItemContent>
