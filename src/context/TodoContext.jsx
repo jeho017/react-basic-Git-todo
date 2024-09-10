@@ -1,30 +1,29 @@
-import { createContext, useState } from "react";
-import { SAMPLE_TODOS } from "../constants/sample-todos";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { todoClient } from "../api/todoClient";
 
 export const TodoContext = createContext();
 
 const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useState(SAMPLE_TODOS);
+  const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
 
-  const addTodos = (newTodoObj) => setTodos([newTodoObj, ...todos]);
+  const fetchTodos = async () => {
+    const { data } = await todoClient.get("/");
 
-  const toggleCompleted = (id) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        const newTodo = {
-          ...todo,
-          completed: !todo.completed,
-        };
+    setTodos(data);
+  };
 
-        return newTodo;
-      }
+  const addTodos = async (newTodoObj) => {
+    await todoClient.post("/", newTodoObj);
 
-      return todo;
-    });
+    fetchTodos();
+  };
 
-    setTodos(updatedTodos);
+  const toggleCompleted = async (id, completed) => {
+    await todoClient.patch(`/${id}`, { completed });
+
+    fetchTodos();
   };
 
   // const toggleCompleted = (id) =>
@@ -34,18 +33,18 @@ const TodoProvider = ({ children }) => {
   //   )
   //   );
 
-  const handleDelete = (id) => {
-    const filteredTodos = todos.filter((todo) => {
-      if (todo.id === id) {
-        return false;
-      }
-      // 그게 아니면
-      return true;
-    });
+  const handleDelete = async (id) => {
+    await todoClient.delete(`/${id}`);
+
+    fetchTodos();
 
     setTodos(filteredTodos);
     navigate("/");
   };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
   const completedTodos = todos.filter((todo) => todo.completed);
   const pendingTodos = todos.filter((todo) => !todo.completed);
 
@@ -53,6 +52,7 @@ const TodoProvider = ({ children }) => {
     <TodoContext.Provider
       value={{
         todos,
+        fetchTodos,
         addTodos,
         toggleCompleted,
         handleDelete,
