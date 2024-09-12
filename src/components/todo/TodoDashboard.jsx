@@ -1,14 +1,29 @@
 import { ClipboardCheck, Ellipsis, Monitor, Video } from "lucide-react";
-import { useContext } from "react";
 import styled from "styled-components";
-import { TodoContext } from "../../context/TodoContext";
 import { Link, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getTodos } from "../../api/todoClient";
 
 const TodoDashboard = () => {
-  const { todos, completedTodos, pendingTodos } = useContext(TodoContext);
-
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
+
+  const {
+    data: todos,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
+
+  if (isLoading) {
+    return <DashboardSection>로딩중...</DashboardSection>;
+  }
+
+  if (error) {
+    return <DashboardSection>Error: {error.message}</DashboardSection>;
+  }
 
   return (
     <DashboardSection>
@@ -37,7 +52,7 @@ const TodoDashboard = () => {
             <Ellipsis />
           </div>
           <p>
-            {completedTodos.length} <br /> Completed
+            {todos.length} <br /> Completed
           </p>
         </DashboardCard>
         <DashboardCard
@@ -51,7 +66,7 @@ const TodoDashboard = () => {
             <Ellipsis />
           </div>
           <p>
-            {pendingTodos.length} <br /> Pending
+            {todos.length} <br /> Pending
           </p>
         </DashboardCard>
       </DashboardCardList>

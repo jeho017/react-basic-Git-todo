@@ -1,13 +1,26 @@
 import React, { useContext } from "react";
-import { TodoContext } from "../../context/TodoContext";
+
 import { useParams } from "react-router-dom";
 import TodoItem from "./TodoItem";
+import { useQuery } from "@tanstack/react-query";
+import { getTodoDetail } from "../../api/todoClient";
 
-const TodoDetail = () => {
-  const { todos } = useContext(TodoContext);
-  const { id } = useParams();
+const TodoDetail = ({ id }) => {
+  const {
+    data: todo,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["todos", id],
+    queryFn: () => getTodoDetail(id),
+  });
+  if (isLoading) {
+    return <section>로딩중...</section>;
+  }
 
-  const todo = todos.find((todo) => todo.id === id);
+  if (error) {
+    return <section>Error: {error.message}</section>;
+  }
 
   if (!todo) {
     return <section>404 NOT Found Todo</section>;

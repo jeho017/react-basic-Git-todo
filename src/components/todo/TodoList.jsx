@@ -1,33 +1,31 @@
-import { useContext } from "react";
 import TodoItem from "./TodoItem";
 import styled from "styled-components";
-import { TodoContext } from "../../context/TodoContext";
 import { useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getTodos } from "../../api/todoClient";
 
 const TodoList = () => {
-  const { todos, completedTodos, pendingTodos } = useContext(TodoContext);
+  // const [searchParams] = useSearchParams();
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
 
-  const [searchParams] = useSearchParams();
+  if (isLoading) {
+    return <TaskSection>로딩중...</TaskSection>;
+  }
 
-  const getFilteredTodos = () => {
-    const filter = searchParams.get("filter");
+  if (error) {
+    return <TaskSection>Error: {error.message}</TaskSection>;
+  }
 
-    if (filter === "completed") {
-      return completedTodos;
-    } else if (filter === "pending") {
-      return pendingTodos;
-    }
-    return todos;
-  };
-
-  const filteredTodos = getFilteredTodos();
   return (
     <TaskSection>
       <TaskHeader>
         <h1>Tasks</h1>
       </TaskHeader>
       <TaskList>
-        {filteredTodos.map((todo) => (
+        {data.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </TaskList>

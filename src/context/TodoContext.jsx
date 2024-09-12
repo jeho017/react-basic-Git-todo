@@ -1,68 +1,68 @@
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { todoClient } from "../api/todoClient";
+// import { createContext, useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { todoClient } from "../api/todoClient";
 
-export const TodoContext = createContext();
+// export const TodoContext = createContext();
 
-const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useState([]);
-  const navigate = useNavigate();
+// const TodoProvider = ({ children }) => {
+//   const [todos, setTodos] = useState([]);
+//   const navigate = useNavigate();
 
-  const fetchTodos = async () => {
-    const { data } = await todoClient.get("/");
+//   const fetchTodos = async () => {
+//     const { data } = await todoClient.get("/");
 
-    setTodos(data);
-  };
+//     setTodos(data);
+//   };
 
-  const addTodos = async (newTodoObj) => {
-    await todoClient.post("/", newTodoObj);
+//   const addTodos = async (newTodoObj) => {
+//     await todoClient.post("/", newTodoObj);
 
-    fetchTodos();
-  };
+//     fetchTodos();
+//   };
 
-  const toggleCompleted = async (id, completed) => {
-    await todoClient.patch(`/${id}`, { completed });
+//   const toggleCompleted = async (id, completed) => {
+//     await todoClient.patch(`/${id}`, { completed });
 
-    fetchTodos();
-  };
+//     fetchTodos();
+//   };
 
-  // const toggleCompleted = (id) =>
-  //   setTodos((prevTodos) =>
-  //   prevTodos.map((todo) =>
-  //   todo.id === id ? {...todo, completed: !todo.completed} : todo
-  //   )
-  //   );
+//   // const toggleCompleted = (id) =>
+//   //   setTodos((prevTodos) =>
+//   //   prevTodos.map((todo) =>
+//   //   todo.id === id ? {...todo, completed: !todo.completed} : todo
+//   //   )
+//   //   );
 
-  const handleDelete = async (id) => {
-    await todoClient.delete(`/${id}`);
+//   const handleDelete = async (id) => {
+//     await todoClient.delete(`/${id}`);
 
-    fetchTodos();
+//     fetchTodos();
 
-    setTodos(filteredTodos);
-    navigate("/");
-  };
+//     setTodos(filteredTodos);
+//     navigate("/");
+//   };
 
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-  const completedTodos = todos.filter((todo) => todo.completed);
-  const pendingTodos = todos.filter((todo) => !todo.completed);
+//   useEffect(() => {
+//     fetchTodos();
+//   }, []);
+//   const completedTodos = todos.filter((todo) => todo.completed);
+//   const pendingTodos = todos.filter((todo) => !todo.completed);
 
-  return (
-    <TodoContext.Provider
-      value={{
-        todos,
-        fetchTodos,
-        addTodos,
-        toggleCompleted,
-        handleDelete,
-        completedTodos,
-        pendingTodos,
-      }}
-    >
-      {children}
-    </TodoContext.Provider>
-  );
-};
+//   return (
+//     <TodoContext.Provider
+//       value={{
+//         todos,
+//         fetchTodos,
+//         addTodos,
+//         toggleCompleted,
+//         handleDelete,
+//         completedTodos,
+//         pendingTodos,
+//       }}
+//     >
+//       {children}
+//     </TodoContext.Provider>
+//   );
+// };
 
-export default TodoProvider;
+// export default TodoProvider;

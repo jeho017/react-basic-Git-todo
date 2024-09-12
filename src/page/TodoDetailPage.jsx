@@ -1,12 +1,14 @@
 import React from "react";
 import TodoDetail from "../components/todo/TodoDetail";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const TodoDetailPage = () => {
+  const { id } = useParams();
+
   return (
     <div>
-      <TodoDetail />
+      <TodoDetail id={id} />
 
       <Link to="/">
         <ToListButton>목록으로</ToListButton>
