@@ -3,19 +3,11 @@ import styled from "styled-components";
 import { TaskItemActionButton } from "./TodoItem";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postTodo } from "../../api/todoClient";
+import { useCreateTodoMutation } from "../../hooks/useTodoMutation";
 
 const TodoForm = () => {
   const [newTodo, setNewTodo] = useState("");
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation({
-    mutationFn: (todo) => postTodo(todo),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["todos"],
-      });
-    },
-  });
+  const { mutate } = useCreateTodoMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
