@@ -5,10 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getTodos } from "../../api/todoClient";
 
 const TodoList = () => {
-  // const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get("filter");
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
+    queryKey: ["todos", filter],
+    queryFn: () => getTodos(filter),
   });
 
   if (isLoading) {

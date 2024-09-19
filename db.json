@@ -1,8 +1,13 @@
 {
   "todos": [
     {
-      "id": "1f18",
-      "text": "123",
+      "id": "7b53",
+      "text": "햄부기",
+      "completed": false
+    },
+    {
+      "id": "31c9",
+      "text": "돈까스",
       "completed": false
     }
   ]
