@@ -4,10 +4,10 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getTodos } from "../../api/todoClient";
 import { useTodoQuery } from "../../hooks/useTodoQuery";
+import { useGetFilter } from "../../hooks/useGetFilter";
 
 const TodoDashboard = () => {
-  const [searchParams] = useSearchParams();
-  const filter = searchParams.get("filter");
+  const { filter } = useGetFilter();
 
   // const { data: allTodos } = useQuery({
   //   queryKey: ["todos"],

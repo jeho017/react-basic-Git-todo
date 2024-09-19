@@ -4,16 +4,11 @@ import { useParams } from "react-router-dom";
 import TodoItem from "./TodoItem";
 import { useQuery } from "@tanstack/react-query";
 import { getTodoDetail } from "../../api/todoClient";
+import { useTodoDetailQuery } from "../../hooks/useTodoQuery";
 
 const TodoDetail = ({ id }) => {
-  const {
-    data: todo,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["todos", id],
-    queryFn: () => getTodoDetail(id),
-  });
+  const { data: todo, isLoading, error } = useTodoDetailQuery(id);
+
   if (isLoading) {
     return <section>로딩중...</section>;
   }
