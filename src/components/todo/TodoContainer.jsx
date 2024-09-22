@@ -1,7 +1,6 @@
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import TodoDashboard from "./TodoDashboard";
-import styled from "styled-components";
 
 const TodoContainer = () => {
   // const [todos, setTodos] = useState(SAMPLE_TODOS);
@@ -65,19 +64,13 @@ const TodoContainer = () => {
   //   setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
 
   return (
-    <TodoContainerWrapper>
+    <div className="flex flex-col gap-12">
       <TodoDashboard />
       <TodoForm />
 
       <TodoList />
-    </TodoContainerWrapper>
+    </div>
   );
 };
 
 export default TodoContainer;
-
-const TodoContainerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-`;

@@ -1,5 +1,5 @@
 import TodoItem from "./TodoItem";
-import styled from "styled-components";
+
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getTodos } from "../../api/todoClient";
@@ -9,44 +9,27 @@ const TodoList = () => {
   const { data, isLoading, error } = useTodoFilteredQuery();
 
   if (isLoading) {
-    return <TaskSection>로딩중...</TaskSection>;
+    return <section className="flex flex-col gap-4">로딩중...</section>;
   }
 
   if (error) {
-    return <TaskSection>Error: {error.message}</TaskSection>;
+    return (
+      <section className="flex flex-col gap-4">Error: {error.message}</section>
+    );
   }
 
   return (
-    <TaskSection>
-      <TaskHeader>
-        <h1>Tasks</h1>
-      </TaskHeader>
-      <TaskList>
+    <section className="flex flex-col gap-4">
+      <div>
+        <h1 className="text-2xl font-bold">Tasks</h1>
+      </div>
+      <ul className="flex flex-col gap-4">
         {data.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
-      </TaskList>
-    </TaskSection>
+      </ul>
+    </section>
   );
 };
 
 export default TodoList;
-
-const TaskSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const TaskHeader = styled.div`
-  h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-`;
-
-const TaskList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
