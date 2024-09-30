@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getTodoDetail } from "../../api/todoClient";
 import { useTodoDetailQuery } from "../../hooks/useTodoQuery";
 
-const TodoDetail = ({ id }) => {
+interface TodoDetailProps {
+  id: string;
+}
+
+const TodoDetail = ({ id }: TodoDetailProps) => {
   const { data: todo, isLoading, error } = useTodoDetailQuery(id);
 
   if (isLoading) {
