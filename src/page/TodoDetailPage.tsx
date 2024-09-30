@@ -1,4 +1,3 @@
-import React from "react";
 import TodoDetail from "../components/todo/TodoDetail";
 
 import { Link, useParams } from "react-router-dom";

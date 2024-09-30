@@ -1,9 +1,9 @@
 import TodoItem from "./TodoItem";
 
-import { useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getTodos } from "../../api/todoClient";
-import { useTodoFilteredQuery, useTodoQuery } from "../../hooks/useTodoQuery";
+// import { useSearchParams } from "react-router-dom";
+// import { useQuery } from "@tanstack/react-query";
+// import { getTodos } from "../../api/todoClient";
+import { useTodoFilteredQuery } from "../../hooks/useTodoQuery";
 
 const TodoList = () => {
   const { data, isLoading, error } = useTodoFilteredQuery();

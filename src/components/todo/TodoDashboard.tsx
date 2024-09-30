@@ -1,8 +1,8 @@
 import { ClipboardCheck, Ellipsis, Monitor, Video } from "lucide-react";
 
-import { Link, useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getTodos } from "../../api/todoClient";
+import { Link } from "react-router-dom";
+// import { useQuery } from "@tanstack/react-query";
+// import { getTodos } from "../../api/todoClient";
 import { useTodoQuery } from "../../hooks/useTodoQuery";
 import { useGetFilter } from "../../hooks/useGetFilter";
 
@@ -24,7 +24,7 @@ const TodoDashboard = () => {
   //   queryFn: () => getTodos("pending"),
   // });
 
-  const { data: allTodos } = useTodoQuery();
+  const { data: allTodos } = useTodoQuery(null);
   const { data: completedTodos } = useTodoQuery("completed");
   const { data: pendingTodos } = useTodoQuery("pending");
 

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import TodoItem from "./TodoItem";
-import { useQuery } from "@tanstack/react-query";
-import { getTodoDetail } from "../../api/todoClient";
+// import { useQuery } from "@tanstack/react-query";
+// import { getTodoDetail } from "../../api/todoClient";
 import { useTodoDetailQuery } from "../../hooks/useTodoQuery";
 
 interface TodoDetailProps {
