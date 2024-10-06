@@ -11,7 +11,7 @@ const TodoList = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <ul>
+    <ul className="flex flex-col gap-2">
       {todos?.map((todo) => (
         <li key={todo.id}>
           <TodoItem todo={todo} />

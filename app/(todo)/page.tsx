@@ -23,8 +23,9 @@ const TodoPage = async () => {
           <h1 className="font-black text-4xl">TODO LIST</h1>
         </section>
         <Separator />
-        <TodoForm />
+
         <TodoList />
+        <TodoForm />
       </div>
     </HydrationBoundary>
   );
