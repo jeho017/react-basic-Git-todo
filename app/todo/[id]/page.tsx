@@ -9,11 +9,11 @@ interface TodoDetailPageProps {
 
 const TodoDetailPage = async ({ params }: TodoDetailPageProps) => {
   const id = params.id;
-  const { completed, text } = await getTodoDetail(id);
+  const { completed, title } = await getTodoDetail(id);
 
   return (
     <div>
-      TodoDetailPage {text} - {completed ? "완료됨" : "미완료"}
+      TodoDetailPage {title} - {completed ? "완료됨" : "미완료"}
     </div>
   );
 };
