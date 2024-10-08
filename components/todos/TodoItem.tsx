@@ -1,12 +1,11 @@
 "use client";
 
-import { getTodoDetail, toggleTodo } from "@/api/todo-api";
 import {
   useDeleteTodoMutation,
   useToggleTodoMutation,
 } from "@/query/useTodoMutation";
 import { Todo } from "@/types/todo.types";
-import { useQuery } from "@tanstack/react-query";
+
 import Link from "next/link";
 import { Button } from "../ui/button";
 
