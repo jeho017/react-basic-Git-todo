@@ -1,12 +1,14 @@
 "use client";
 
-import { getTodos } from "@/api/todo-api";
-import { useQuery } from "@tanstack/react-query";
+import { useTodoStore } from "@/store/useTodoStore";
 import TodoItem from "./TodoItem";
 import { useTodoQuery } from "@/query/useTodoQuery";
 
 const TodoList = () => {
-  const { data: todos, isLoading } = useTodoQuery();
+  const { completed } = useTodoStore();
+  const { data: todos, isLoading } = useTodoQuery(
+    completed ? "completed" : "pending"
+  );
 
   if (isLoading) return <div>Loading...</div>;
 
